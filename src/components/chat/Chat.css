@@ -1,0 +1,98 @@
+.chat {
+  display: flex;
+  flex-direction: column;
+  flex: 0.65;
+}
+
+.chat__header {
+  display: flex;
+  align-items: center;
+  /* justify-content: space-between; */
+  /* height: 60px; */
+  padding: 10px;
+}
+
+.chat__headerInfo {
+  flex: 1;
+  margin-left: 15px;
+}
+
+.chat__headerInfo > h3 {
+  margin-bottom: 3px;
+  font-weight: 500;
+}
+
+.chat__headerInfo > p {
+  color: grey;
+}
+
+.chat__headerRight {
+}
+
+.chat__body {
+  flex: 1;
+  background-image: url("https://firebasestorage.googleapis.com/v0/b/whatsup-clone-9dbbb.appspot.com/o/marjan-blan-marjanblan-794QUz5-cso-unsplash.jpg?alt=media&token=5e5973b9-247a-4ac1-b594-5d674d32ef1c");
+  background-repeat: repeat;
+  background-position: center;
+  padding: 30px;
+  overflow: scroll;
+}
+
+.chat__message {
+  position: relative;
+  font-size: 16px;
+  padding: 10px;
+  width: fit-content;
+  border-radius: 20px;
+  background-color: white;
+  margin-bottom: 30px;
+}
+
+.chat__timestamp {
+  margin-left: 10px;
+  font-size: xx-small;
+}
+
+.chat__name {
+  position: absolute;
+  top: -15px;
+  font-weight: 800;
+  font-size: 0.7rem;
+}
+
+.chat__reciever {
+  margin-left: auto;
+  background-color: teal;
+}
+
+.chat__footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 60px;
+  border-top: 1px solid lightgray;
+}
+
+.chat__footer > form {
+  flex: 1;
+  display: flex;
+  /* justify-content: center; */
+}
+
+.chat__footer > form > input {
+  flex: 1;
+  border-radius: 30px;
+  padding: 10px;
+  border: none;
+  outline-width: 0;
+}
+
+.chat__footer > .MuiSvgIcon-root{
+  color: grey;
+  padding: 10px;
+}
+
+.chat__footer > button {
+  border: none;
+}
+
