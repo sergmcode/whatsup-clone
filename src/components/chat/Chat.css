@@ -31,9 +31,10 @@
 
 .chat__body {
   flex: 1;
-  background-image: url("https://firebasestorage.googleapis.com/v0/b/whatsup-clone-9dbbb.appspot.com/o/marjan-blan-marjanblan-794QUz5-cso-unsplash.jpg?alt=media&token=5e5973b9-247a-4ac1-b594-5d674d32ef1c");
+  background-image: url("https://firebasestorage.googleapis.com/v0/b/whatsup-clone-9dbbb.appspot.com/o/nordwood-themes-R53t-Tg6J4c-unsplash.jpg?alt=media&token=183972f6-2c77-49cd-add0-2562546d6768");
   background-repeat: repeat;
   background-position: center;
+  background-size: contain;
   padding: 30px;
   overflow: scroll;
 }
@@ -96,3 +97,7 @@
   border: none;
 }
 
+.chat__submitButton{
+  visibility: hidden;
+  width: 0;
+}

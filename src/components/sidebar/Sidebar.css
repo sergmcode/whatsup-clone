@@ -56,4 +56,6 @@
 
 .sidebar__chats{
   overflow: scroll;
+  flex: 1;
 }
+
