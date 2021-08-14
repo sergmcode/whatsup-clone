@@ -1,7 +1,8 @@
 ## FULL STACK messaging app
 
-### Using React as a front end
-### Mongo DB + pusher on the backend
+### React
+### Mongo DB + pusher
+### Firebase
 
 ### [https://whatsup-clone-9dbbb.web.app/](https://whatsup-clone-9dbbb.web.app/)
 
