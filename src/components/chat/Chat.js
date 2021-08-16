@@ -28,11 +28,13 @@ function Chat({ messages }) {
     axios
       .post("/api/v1/messages/new", {
         message: message,
-        name: "serg",
-        timestamp: "some timestamp",
+        name: "Stefan Banach",
+        timestamp: "15 minutes ago",
         recieved: true,
       })
-      .then(() => {});
+      .then((resp) => {
+        console.log(resp)
+      });
   };
 
   return (
@@ -86,11 +88,16 @@ function Chat({ messages }) {
             onChange={(e) => {
               setMessage(e.target.value);
             }}
+            onKeyDown={(e) => {
+              if(e.key === 'Enter'){
+                sendMessage(e)
+              }
+            }}
           />
           <button
             onClick={sendMessage}
             type="submit"
-            className="chat__submitButton"
+            className="_____chat__submitButton"
           >
             Send message
           </button>

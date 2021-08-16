@@ -8,7 +8,7 @@ import Pusher from "pusher-js";
 function App() {
   const [messages, setMessages] = useState([]);
   useEffect(() => {
-    axios.get("/messages/sync").then((response) => {
+    axios.get("/api/v1/messages/sync").then((response) => {
       setMessages(response.data);
     });
   }, []);
@@ -22,6 +22,7 @@ function App() {
       // alert(JSON.stringify(newMessage));
       setMessages([...messages, newMessage])
     });
+
     return () => {
       channel.unbind_all();
       channel.unsubscribe();

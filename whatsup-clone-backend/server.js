@@ -2,9 +2,15 @@
 import express, { json } from "express";
 import mongoose from "mongoose";
 import colors from "colors";
-import Messages from "./dbMessages.js";
+// import Messages from "./dbMessages.js";
 import Pusher from "pusher";
 import cors from "cors";
+
+import dotenv from 'dotenv'
+dotenv.config()
+
+const MONGO_URL = process.env.MONGO_URL
+console.log(MONGO_URL)
 
 // app config
 const app = express();
@@ -16,13 +22,22 @@ app.use(cors());
 
 // DB config
 mongoose.connect(
-  "mongodb+srv://admin:6mdoMeBecXJ6iji0@cluster0.m2mza.mongodb.net/whatsupclonedb?retryWrites=true&w=majority",
+  MONGO_URL,
   {
     useCreateIndex: true,
     useNewUrlParser: true,
     useUnifiedTopology: true,
   }
 );
+
+const whatsupSchema = mongoose.Schema({
+  name: String,
+  message: String,
+  timestamp: String,
+  recieved: Boolean,
+});
+
+const Messages = mongoose.model("messagecontents2", whatsupSchema);
 
 const pusher = new Pusher({
   appId: "1200783",
@@ -32,16 +47,16 @@ const pusher = new Pusher({
   useTLS: true,
 });
 
-// Pusher
 const db = mongoose.connection;
 
+// Pusher
 db.once("open", () => {
   console.log("DB connected.".green.bold);
-  const msgCollection = db.collection("messagecontents");
+  const msgCollection = db.collection("messagecontents2");
   const changeStream = msgCollection.watch();
 
   changeStream.on("change", (change) => {
-    console.log(`Change occured: `, change);
+    // console.log(`Change occured: `, change);
     if (change.operationType === "insert") {
       const messageDetails = change.fullDocument;
       pusher.trigger("messages", "inserted", {
@@ -49,19 +64,28 @@ db.once("open", () => {
         message: messageDetails.message,
         timestamp: messageDetails.timestamp,
         recieved: messageDetails.recieved,
-      });
+        _id: messageDetails._id
+      }).then(() => {
+        // console.log('pusher ok')
+      }, () => {
+        // console.log('pusher NOT ok')
+      })
     } else {
       console.log("Error triggering Pusher".red.bold);
     }
   });
 });
 
+// db.once('open', () => {
+//   console.log("DB OPEN!!!")
+// })
+
 // API routes
 app.get("/", (req, res) => {
   res.status(200).send("Express server");
 });
 
-app.get("/messages/sync", (req, res) => {
+app.get("/api/v1/messages/sync", (req, res) => {
   Messages.find((err, data) => {
     if (err) {
       res.status(500).send(err);
@@ -87,5 +111,3 @@ app.listen(port, () => {
   console.log(`Server started on localhost:${port}`.green.bold);
 });
 
-// 6mdoMeBecXJ6iji0
-// mongodb+srv://admin:6mdoMeBecXJ6iji0@cluster0.m2mza.mongodb.net/whatsupclonedb?retryWrites=true&w=majority
